@@ -24,7 +24,7 @@ class GossipNode:
 
     def input_message(self):
         while True:
-            message_to_send = input("Enter a message to send:\n")
+            message_to_send = raw_input("Enter a message to send:\n")
 
             self.transmit_message(message_to_send.encode('ascii'))
 
@@ -40,7 +40,7 @@ class GossipNode:
             print("\nMessage is: '{0}'.\nReceived at [{1}] from [{2}]\n"
                   .format(message_to_forward.decode('ascii'), time.ctime(time.time()), address[1]))
 
-                      self.transmit_message(message_to_forward)
+            self.transmit_message(message_to_forward)
 
     def transmit_message(self, message):
         while self.susceptible_nodes:
@@ -52,7 +52,7 @@ class GossipNode:
             print("Infected nodes =>", GossipNode.infected_nodes)
             print("Port selected is [{0}]".format(selected_port))
 
-     
+
             self.node.sendto(message, (self.hostname, selected_port))
 
             self.susceptible_nodes.remove(selected_port)
